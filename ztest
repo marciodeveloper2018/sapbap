@@ -1,0 +1,25 @@
+*&---------------------------------------------------------------------*
+*& Report ZTEST
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ztest.
+
+DATA: lt_usr02     TYPE TABLE OF usr02,
+      ls_zusername TYPE zusername,
+      ls_usr02     TYPE usr02.
+
+SELECT * FROM usr02 INTO TABLE lt_usr02.
+
+SORT lt_usr02 BY bname ASCENDING.
+
+LOOP AT lt_usr02 INTO ls_usr02.
+
+  ls_zusername-afnam = ls_usr02-bname.
+  ls_zusername-bname = ls_usr02-bname.
+
+  INSERT zusername FROM ls_zusername.
+
+ENDLOOP.
+
+WRITE: 'Carga completa'.
